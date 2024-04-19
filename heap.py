@@ -28,11 +28,11 @@ class MaxHeap:
             left_index = self._left_child(index)
             right_index = self._right_child(index)
 
-            if (left_index < len(self.heap) and 
+            if (left_index < len(self.heap) and
                     self.heap[left_index] > self.heap[max_index]):
                 max_index = left_index
 
-            if (right_index < len(self.heap) and 
+            if (right_index < len(self.heap) and
                     self.heap[right_index] > self.heap[max_index]):
                 max_index = right_index
 
@@ -41,7 +41,7 @@ class MaxHeap:
                 index = max_index
             else:
                 return
-                       
+
     def remove(self):
         if len(self.heap) == 0:
             return None
@@ -57,28 +57,56 @@ class MaxHeap:
 
 
 def find_kth_smallest(nums, k):
-    ###################################
-    ###                             ###
-    ###                             ###
-    ###                             ###
-    ###################################
+
+    maxHeap = MaxHeap()
+
+    for numbers in nums:
+        maxHeap.insert(numbers)
+        if len(maxHeap.heap) > k:
+            maxHeap.remove()
+
+    return maxHeap.heap[0]
 
 
+#
+# # Test cases
+# nums = [[3, 2, 1, 5, 6, 4], [6, 5, 4, 3, 2, 1], [1, 2, 3, 4, 5, 6], [3, 2, 3, 1, 2, 4, 5, 5, 6], [6,6,4,5,2,3,1,9,9]]
+# ks = [2, 3, 4, 7, 4]
+# expected_outputs = [2, 3, 4, 5, 4]
+#
+#
+#
+#
+#
+# for i in range(len(nums)):
+#     print(f'Test case {i + 1}...')
+#     print(f'Input: {nums[i]} with k = {ks[i]}')
+#     result = find_kth_smallest(nums[i], ks[i])
+#     print(f'Output: {result}')
+#     print(f'Expected output: {expected_outputs[i]}')
+#     print(f'Test passed: {result == expected_outputs[i]}')
+#     print('---------------------------------------')
 
-
-# Test cases
-nums = [[3,2,1,5,6,4], [6,5,4,3,2,1], [1,2,3,4,5,6], [3,2,3,1,2,4,5,5,6]]
-ks = [2, 3, 4, 7]
-expected_outputs = [2, 3, 4, 5]
-
-for i in range(len(nums)):
-    print(f'Test case {i+1}...')
-    print(f'Input: {nums[i]} with k = {ks[i]}')
-    result = find_kth_smallest(nums[i], ks[i])
-    print(f'Output: {result}')
-    print(f'Expected output: {expected_outputs[i]}')
-    print(f'Test passed: {result == expected_outputs[i]}')
-    print('---------------------------------------')
+saraksts = []
+print("Enter the numbers, enter next to continue")
+while True:
+    answer = input()
+    if answer.lower() == "next":
+        break
+    try:
+        answer = int(answer)
+        saraksts.append(answer)
+    except:
+        print("wrong input")
+print("Now which lowest number")
+while True:
+    answer = input()
+    try:
+        answer = int(answer)
+        print(find_kth_smallest(saraksts, int(answer)))
+        break
+    except:
+        print("wrong input")
 
 
 """
@@ -110,4 +138,3 @@ for i in range(len(nums)):
     ---------------------------------------
 
 """
-
